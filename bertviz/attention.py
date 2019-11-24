@@ -90,6 +90,8 @@ def get_attention(model, model_type, tokenizer, sentence_a, sentence_b=None, inc
     for layer, attn_data in enumerate(attn_data_list):
         # Process attention
         print('attn_data', attn_data)
+        print('\n')
+        print('attn_data[-1]', attn_data[-1])
         attn = attn_data['attn'][0]  # assume batch_size=1; shape = [num_heads, source_seq_len, target_seq_len]
         attn_dict['all'].append(attn.tolist())
         if is_sentence_pair:
