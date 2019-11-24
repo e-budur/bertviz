@@ -76,7 +76,7 @@ def get_attention(model, model_type, tokenizer, sentence_a, sentence_b=None, inc
     else:
         output = model(tokens_tensor)
     attn_data_list = output[-1]
-
+    print('attn_data_list', attn_data_list)
     # Populate map with attn data and, optionally, query, key data
     attn_dict = defaultdict(list)
     if include_queries_and_keys:
