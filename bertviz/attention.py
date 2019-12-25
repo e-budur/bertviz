@@ -65,7 +65,7 @@ def get_attention(model, model_type, tokenizer, sentence_a, sentence_b=None, inc
 			tokens_a = [tokenizer.cls_token] + tokenizer.tokenize(sentence_a) + [
 				tokenizer.sep_token]
 			tokens_b = tokenizer.tokenize(sentence_b) + [tokenizer.sep_token] + [tokenizer.mlb_token] + [tokenizer.sep_token]
-			token_type_ids =  len(1 + tokens_a + 1) * [0] + len(tokens_b + 1 + 1 + 1) * [1]
+			token_type_ids =  (len(tokens_a) + 2) * [0] + (len(tokens_b) + 3) * [1]
 		elif model_type == 'roberta':
 			tokens_a = [tokenizer.cls_token] + tokenizer.tokenize(sentence_a) + [tokenizer.sep_token]
 			tokens_b = [tokenizer.sep_token] + tokenizer.tokenize(sentence_b) + [tokenizer.sep_token]
