@@ -50,8 +50,8 @@ def get_attention(model, model_type, tokenizer, sentence_a, sentence_b=None, inc
 		if model_type in ('bert', 'roberta'):
 			tokens_a = [tokenizer.cls_token] + tokenizer.tokenize(sentence_a) + [tokenizer.sep_token]
 		elif model_type == 'bert-nlu':
-			tokens_a = [tokenizer.cls_token] + [tokenizer.multi_label_token] + tokenizer.tokenize(sentence_a) + [
-				tokenizer.sep_token]
+			tokens_a = [tokenizer.cls_token] + tokenizer.tokenize(sentence_a) + [
+				tokenizer.sep_token] + [tokenizer.mlb_token]
 		elif model_type == 'xlnet':
 			tokens_a = tokenizer.tokenize(sentence_a) + [tokenizer.sep_token] + [tokenizer.cls_token]
 		else:
@@ -62,9 +62,9 @@ def get_attention(model, model_type, tokenizer, sentence_a, sentence_b=None, inc
 			tokens_b = tokenizer.tokenize(sentence_b) + [tokenizer.sep_token]
 			token_type_ids = torch.LongTensor([[0] * len(tokens_a) + [1] * len(tokens_b)])
 		elif model_type == 'bert-nlu':
-			tokens_a = [tokenizer.cls_token] + [tokenizer.mlb_token] + tokenizer.tokenize(sentence_a) + [
+			tokens_a = [tokenizer.cls_token] + tokenizer.tokenize(sentence_a) + [
 				tokenizer.sep_token]
-			tokens_b = tokenizer.tokenize(sentence_b) + [tokenizer.sep_token]
+			tokens_b = tokenizer.tokenize(sentence_b) + [tokenizer.sep_token] + [tokenizer.mlb_token]
 			token_type_ids = torch.LongTensor([[0] * len(tokens_a) + [1] * len(tokens_b)])
 		elif model_type == 'roberta':
 			tokens_a = [tokenizer.cls_token] + tokenizer.tokenize(sentence_a) + [tokenizer.sep_token]
