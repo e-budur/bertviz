@@ -10,6 +10,21 @@ from transformers.modeling_bert import BertForPreTraining as BertModel
 from transformers.modeling_bert_nlu import BertNLUForPreTraining as BertNLUModel
 from bertviz.head_view import show
 
+def call_html():
+  import IPython
+  display(IPython.core.display.HTML('''
+        <script src="/static/components/requirejs/require.js"></script>
+        <script>
+          requirejs.config({
+            paths: {
+              base: '/static/base',
+              "d3": "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.8/d3.min",
+              jquery: '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min',
+            },
+          });
+        </script>
+        '''))
+
 def test_bert():
 	model_type = 'bert'
 	model_version = 'bert-base-cased'
@@ -18,6 +33,7 @@ def test_bert():
 	tokenizer = BertTokenizer.from_pretrained(model_version, do_lower_case=do_lower_case)
 	sentence_a = "The cat sat on the mat"
 	sentence_b = "The cat lay on the rug"
+	call_html()
 	show(model, model_type, tokenizer, sentence_a, sentence_b)
 
 def test_bert_nlu():
@@ -31,6 +47,7 @@ def test_bert_nlu():
 	tokenizer = BertNLUTokenizer.from_pretrained(model_version, do_lower_case=do_lower_case)
 	sentence_a = "The cat sat on the mat"
 	sentence_b = "The cat lay on the rug"
+	call_html()
 	show(model, model_type, tokenizer, sentence_a, sentence_b=sentence_b)
 # Gather our code in a main() function
 def main():
