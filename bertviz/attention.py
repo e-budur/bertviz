@@ -73,7 +73,10 @@ def get_attention(model, model_type, tokenizer, sentence_a, sentence_b=None, inc
 		else:
 			tokens_b = tokenizer.tokenize(sentence_b)
 
-	token_ids = tokenizer.convert_tokens_to_ids(tokens_a + (tokens_b if tokens_b else []))
+	input_tokens = tokens_a + (tokens_b if tokens_b else [])
+	token_ids = tokenizer.convert_tokens_to_ids(input_tokens)
+	print('input_tokens:', input_tokens)
+	print('token_ids:', token_ids)
 	tokens_tensor = torch.tensor(token_ids).unsqueeze(0)
 
 	# Call model to get attention data
