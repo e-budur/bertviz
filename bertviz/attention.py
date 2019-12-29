@@ -77,6 +77,7 @@ def get_attention(model, model_type, tokenizer, sentence_a, sentence_b=None, inc
 	token_ids = tokenizer.convert_tokens_to_ids(input_tokens)
 	print('input_tokens:', input_tokens)
 	print('token_ids:', token_ids)
+	token_type_ids = None
 	tokens_tensor = torch.tensor(token_ids).unsqueeze(0)
 
 	# Call model to get attention data
